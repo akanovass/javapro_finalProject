@@ -10,10 +10,17 @@
 <head>
     <title>login</title>
     <%@include file="vector/bootstrap0.jsp"%>
+    <style>
+        .registerLink{
+            text-align: center;
+        }
+        button{
+            margin-bottom: 15px;
+        }
+    </style>
 
 </head>
 <body style="margin: 0px 200px;">
-    <%@include file="vector/navbar.jsp"%>
     <%
        String error = request.getParameter("error");
         if(error!=null){
@@ -28,9 +35,10 @@
     %>
 
 
-
+    <div class="container"> <div class="row mt-3">
+        <div class="col-6 mx-auto">
     <div class="card" style="margin-top: 20px;">
-        <h5 class="card-header">Login Page</h5>
+        <h5 class="card-header">Sign In</h5>
         <form action="/login" method="post">
         <div class="card-body">
             <div class="row">
@@ -47,11 +55,18 @@
                 </div>
                 </div>
             </div>
-            <div>
-                <button class="btn btn-success">Login</button>
+            <div style="display: flex; justify-content: center;">
+                <button class="btn btn-success" >Sign In</button>
+            </div>
+            <div class="registerLink">
+                <h6>Don't have a BBC account?</h6>
+                <a href="/register">Register now</a>
             </div>
         </div>
         </form>
+    </div>
+        </div>
+    </div>
     </div>
 
 </body>

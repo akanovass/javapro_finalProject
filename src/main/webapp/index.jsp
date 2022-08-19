@@ -1,5 +1,6 @@
 <%@ page import="db.Item" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="db.NewsContent" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -18,9 +19,13 @@
             font-weight: bold;
         }
         .card{
-            width: 31%;
+            width: 100%;
             margin: 10px;
+            padding: 10px;
+        }
+        .card-title{
             text-align: center;
+            padding-top: 4px;
         }
         .items{
             display: flex;
@@ -30,25 +35,42 @@
 
 
         }
+        p{
+            color:grey;
+            margin-bottom: 0;
+        }
+        .headergoi{
+            display:flex;
+            justify-content: space-between;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body style="margin: 0px 200px;">
     <%@include file="vector/navbar.jsp"%>
-    <h2>Welcome to BITLAB SHOP</h2>
-    <h6>Electronic devices with high quality and service</h6>
     <div class="items">
         <%
-        ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
-        if(items!=null){
-            for(Item it:items){
+        ArrayList<NewsContent> newsContent = (ArrayList<NewsContent>) request.getAttribute("newsContent");
+        if(newsContent!=null){
+            for(NewsContent it:newsContent){
     %>
-
             <div class="card">
-                <h5 class="card-header"><%=it.getName()%></h5>
+                <div class="headergoi">
+                    <p><%=it.getNews().getPost_date()%></p>
+                    <div>
+                        <p>by John Sudworth</p>
+                        <p><%=it.getLanguage().getCode()%></p>
+                    </div>
+                </div>
+
+
+
                 <div class="card-body">
-                    <h5 class="card-title" style="color:green;"><%=it.getPrice()%> $</h5>
-                    <p class="card-text"><%=it.getDescription()%></p>
-                    <a href="#" class="btn btn-success">Buy Now</a>
+                    <h4 class="card-title" style="color:green;"><%=it.getTitle()%></h4>
+
+                    <label class="card-text"><%=it.getContent()%></label>
+                    <a href="#" >Read More</a>
                 </div>
             </div>
 

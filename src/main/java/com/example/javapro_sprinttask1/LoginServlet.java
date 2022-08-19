@@ -1,6 +1,7 @@
 package com.example.javapro_sprinttask1;
 
 import db.DBManager;
+import db.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,12 +16,15 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String name = request.getParameter("name");
+        String email = request.getParameter("name");
         String password = request.getParameter("password");
-        Boolean bool = DBManager.checkUser(name,password);
-        String link =null;
-        if(bool){
-            link="userPage";
+        User user = DBManager.getUser(email);
+
+        String link = null;
+        if(user!=null && user.getPassword().equals(password)){
+            link="hello";
+            HttpSession session = request.getSession();
+            session.setAttribute("authUser",user);
         }
         else{
             link="login?error";
